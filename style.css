@@ -53,3 +53,16 @@ body{
 	background-color: #2FBE70;
 	border: none;
 }
+#result {
+	display:none;
+}
+.resultText {
+	width:60%;
+	height:500px;
+	margin:120px auto;
+	overflow: hidden;
+	background-color:rgb(181, 255, 84);
+}
+.text {
+	margin:20px;
+}

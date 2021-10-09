@@ -11,7 +11,7 @@
 
 <body>
 
-   <section>
+   <section id="count">
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
@@ -19,7 +19,7 @@
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
-                        <h5>iPhone 11 128GB Black</h5>
+                        <h5><span id="phoneName">iPhone 11 128GB Black</span></h5>
                      </div>
 
                      <div class="col-md-5 center-item">
@@ -38,7 +38,7 @@
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
-                        <h5>iPhone 11 Silicone Case - Black</h5>
+                        <h5><span id="casName">iPhone 11 Silicone Case - Black</span></h5>
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
@@ -70,200 +70,26 @@
                   </div>
                </div>
                <div class="col-md-12 pt-4 pb-4">
-                  <button type="button" class="btn btn-success check-out">Check Out</button>
+                  <button id="checkOut" type="button" class="btn btn-success check-out">Check Out</button>
                </div>
             </div>
          </div>
       </div>
    </section>
-   <script>
 
-      var taxAmount = document.getElementById("tax").innerText;
-      taxAmount = 5;
-      document.getElementById("tax").innerText = taxAmount;
+   <section id="result">
+      <div class="container">
+         <div class="resultText">
+            <div class="text">
+               <h1>Success!</h1>
+               <h1>You have buy <span id="phoneAmount"></span> <span id="phoneNameNext"></span></h1>
+               <h1>And <span id="caseAmountNext"></span> <span id="caseNameNext"></span></h1>
+            </div>
+         </div>
+      </div>
+   </section>
 
-      var addAmount = document.getElementById("addAmount");
-      addAmount.addEventListener("click", function(){
-      var amountNumber = document.getElementById("amountNumber").value;
-      var amountNumberFloat = parseFloat(amountNumber);
-      var totalAmount = amountNumberFloat + 1;
-      document.getElementById("amountNumber").value = totalAmount;
-      const fixedPhonePrice = 1219;
-      var phonePrice = document.getElementById("phonePrice").innerText;
-      var phonePriceNumber = parseFloat(phonePrice);
-      var totalPrice = phonePriceNumber + fixedPhonePrice;
-      document.getElementById("phonePrice").innerText = totalPrice;
-
-      subTotalMore(1219)
-      allTotalMore()
-})
-
-var removeAmount = document.getElementById("removeAmount");
-removeAmount.addEventListener("click", function(){
-   var amountNumber = document.getElementById("amountNumber").value;
-   var amountNumberFloat = parseFloat(amountNumber);
-   var removeAmount = amountNumberFloat - 1;
-   const fixedPhonePrice = 1219;
-   document.getElementById("amountNumber").value = removeAmount;
-   var phonePrice = document.getElementById("phonePrice").innerText;
-   var phonePriceNumber = parseFloat(phonePrice);
-   var removeAmountLess = removeAmount + 1;
-   var removePrice = phonePriceNumber - fixedPhonePrice;
-   document.getElementById("phonePrice").innerText = removePrice;
-
-   if(removePrice < 0){
-      document.getElementById("amountNumber").value = 0;
-      removePrice = 0;
-      document.getElementById("phonePrice").innerText = 0;
-      subTotalLess(0)
-   }
-   else{
-      subTotalLess(1219)
-   }
-   allTotalLess()
-})
-
-   var remove = document.getElementById("removePhoneAll");
-   remove.addEventListener("click", function(){
-      var amountNumber = document.getElementById("amountNumber").value;
-      var amountNumberFloat = parseFloat(amountNumber);
-      document.getElementById("amountNumber").value = 1;
-      var phonePrice = document.getElementById("phonePrice").innerText;
-      var phonePriceNumber = parseFloat(phonePrice);
-      document.getElementById("phonePrice").innerText = 1219;
-
-      subTotalRemove()
-      allTotalMore()
-   })
-
-   var casePriceIncrease = document.getElementById("casePriceIncrease");
-   casePriceIncrease.addEventListener("click", function(){
-      var caseAmount = document.getElementById("caseAmount").value;
-      var caseAmountNumber = parseFloat(caseAmount);
-      var caseAmountIncrease = caseAmountNumber + 1;
-      document.getElementById("caseAmount").value = caseAmountIncrease;
-      const fixedPriceCase = 59;
-      var casePrice = document.getElementById("casePrice").innerText;
-      var casePriceAmount = parseFloat(casePrice);
-      var casePriceTotal = casePriceAmount + fixedPriceCase;
-      document.getElementById("casePrice").innerText = casePriceTotal;
-
-      subTotalMore(59)
-      allTotalMore()
-   })
-
-   var casePriceDecrease = document.getElementById("casePriceDecrease");
-   casePriceDecrease.addEventListener("click", function(){
-      var caseAmount = document.getElementById("caseAmount").value;
-      var caseAmountNumber = parseFloat(caseAmount);
-      var caseAmountIncrease = caseAmountNumber - 1;
-      document.getElementById("caseAmount").value = caseAmountIncrease;
-      const fixedPriceCase = 59;
-      var casePrice = document.getElementById("casePrice").innerText;
-      var casePriceAmount = parseFloat(casePrice);
-      var casePriceNumber = caseAmountIncrease + 1;
-      var casePriceTotal = casePriceAmount - fixedPriceCase;
-      document.getElementById("casePrice").innerText = casePriceTotal;
-
-      if(caseAmount < 1){
-      document.getElementById("caseAmount").value = 0;
-      casePriceAmount = 0;
-      document.getElementById("casePrice").innerText = casePriceAmount;
-      subTotalLess(0)
-      }
-      else{
-         subTotalLess(59)
-      }
-      allTotalLess()
-   })
-
-   var remove = document.getElementById("removeCaseAll");
-   remove.addEventListener("click", function(){
-      var amountNumber = document.getElementById("caseAmount").value;  
-      var amountNumberFloat = parseFloat(amountNumber);
-      document.getElementById("caseAmount").value = 1;
-      var casePrice = document.getElementById("casePrice").innerText;
-      var casePriceNumber = parseFloat(casePrice);
-      document.getElementById("casePrice").innerText = 59;
-
-      subTotalRemove()
-      allTotalMore()
-   })
-
-   var subTotal = document.getElementById("subTotal").innerText;
-   var subTotalNumber = parseFloat(subTotal);
-   var tax = document.getElementById("tax").innerText;
-   var taxNumber = parseFloat(tax);
-   var totalSubTotal = subTotalNumber + taxNumber;
-   document.getElementById("allTotal").innerText = totalSubTotal;
-   
-   subTotalRemove()
-   allTotalMore()
-
-   function subTotalMore(fixedPrice){
-      var subTotal = document.getElementById("subTotal").innerText;
-      var subTotalNumber = parseFloat(subTotal);
-      var TotalSubTotal = subTotalNumber + fixedPrice;
-      document.getElementById("subTotal").innerText = TotalSubTotal;
-   }
-
-   function subTotalLess(fixedPrice){
-      var subTotal = document.getElementById("subTotal").innerText;
-      var subTotalNumber = parseFloat(subTotal);
-      var TotalSubTotal = subTotalNumber - fixedPrice;
-      document.getElementById("subTotal").innerText = TotalSubTotal;
-      var phonePrice = document.getElementById("phonePrice").innerText;
-      var phonePriceNumber = parseFloat(phonePrice);
-   }
-
-   function subTotalRemove(){
-      var phonePrice = document.getElementById("phonePrice").innerText;
-      var phonePriceNumber = parseFloat(phonePrice);
-      var casePrice = document.getElementById("casePrice").innerText;
-      var casePriceAmount = parseFloat(casePrice);
-      subTotal = phonePriceNumber + casePriceAmount;
-      document.getElementById("subTotal").innerText = subTotal;
-   }
-
-   function allTotalMore(){
-      var subTotal = document.getElementById("subTotal").innerText;
-      var subTotalNumber = parseFloat(subTotal);
-      var tax = document.getElementById("tax").innerText;
-      var taxNumber = parseFloat(tax);
-      var allTotal = document.getElementById("allTotal").innerText;
-      var allTotalNumber = parseFloat(allTotal);
-      if(subTotalNumber > 0){
-         var tax = document.getElementById("tax").innerText;
-         var taxNumber = parseFloat(tax);
-         var taxAmount = document.getElementById("tax").innerText;
-         taxAmount = 5;
-         document.getElementById("tax").innerText = taxAmount;
-      }
-      allTotalNumber = subTotalNumber + taxAmount;
-      document.getElementById("allTotal").innerText = allTotalNumber;
-   }
-
-   function allTotalLess(){
-      var phonePrice = document.getElementById("phonePrice").innerText;
-      var phonePriceNumber = parseFloat(phonePrice);
-      var subTotal = document.getElementById("subTotal").innerText;
-      var subTotalNumber = parseFloat(subTotal);
-      var tax = document.getElementById("tax").innerText;
-      var taxNumber = parseFloat(tax);
-      var allTotal = document.getElementById("allTotal").innerText;
-      var allTotalNumber = parseFloat(allTotal);
-      allTotalNumber = subTotalNumber + taxNumber;
-      document.getElementById("allTotal").innerText = allTotalNumber;
-
-      if(subTotalNumber == 0){
-      taxNumber = 0;
-      document.getElementById("tax").innerText = taxNumber;
-      allTotalNumber = subTotalNumber + taxNumber;
-      document.getElementById("allTotal").innerText = allTotalNumber;
-      console.log(allTotalNumber);
-      }
-   }
-   </script>
+   <script src="script.js"></script>
 </body>
 
 </html>
